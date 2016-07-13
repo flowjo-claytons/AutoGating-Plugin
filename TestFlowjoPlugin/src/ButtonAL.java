@@ -7,6 +7,11 @@ import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 public class ButtonAL implements ActionListener{
 
+	 /*
+	 * Overriden function for action listener class.  It is called whenever 
+	 * the button is clicked.  It checks to make sure that all of the user input is 
+	 * correct.
+	 */	
 	@Override
 	public synchronized void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

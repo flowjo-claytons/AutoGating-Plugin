@@ -19,6 +19,9 @@ public class AutoGater implements PopulationPluginInterface {
 
     private List<String> fParameters = new ArrayList<String>(); // the list of $PnN parameter names to be used
     private SElement fOptions; // an XML element that can hold any additional options used by the algorithm
+    /**
+	 * Function returns name of plugin that will be output to the cell inside the workspace
+	 */	
     @Override
     public String getName() {   	 return "Auto-Contour Gating";    }
     /*
@@ -42,10 +45,11 @@ public class AutoGater implements PopulationPluginInterface {
     /*
      * Use the input XML element to set the state of the algorithm object
      */
+    // could be null
+  	// clear the parameter list and re-create from the XML element
     @Override
     public void setElement(SElement elem) {
-   	 fOptions = elem.getChild("Option"); // could be null
-   	 // clear the parameter list and re-create from the XML element
+   	 fOptions = elem.getChild("Option"); 
    	 fParameters.clear();
    	 for (SElement child : elem.getChildren(FJML.Parameter))
    		 fParameters.add(child.getString(FJML.name));
@@ -64,11 +68,7 @@ public class AutoGater implements PopulationPluginInterface {
     @Override   
     public boolean promptForOptions(SElement fcmlQueryElement, List<String> parameterNames)
     {
-    	
-     SElement algorithmElem = getElement();
-     
-   	 GuiFrontEnd UI = new GuiFrontEnd(parameterNames, algorithmElem);
-   	
+   	 GuiFrontEnd UI = new GuiFrontEnd(parameterNames); 	
    	 return UI.PromptForOptions();
     }
    
@@ -91,7 +91,7 @@ public class AutoGater implements PopulationPluginInterface {
    }  
     
 
-    /*
+    /**
      * This method shows how to return different kinds of values using the ExternalAlgorithmResults object.
      */
   

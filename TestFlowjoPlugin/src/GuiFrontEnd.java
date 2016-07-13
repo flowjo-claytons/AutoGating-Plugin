@@ -13,14 +13,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.treestar.lib.xml.SElement;
 //
 public class GuiFrontEnd {
 	private static final long serialVersionUID = 1L;
 
 	public static JDialog window;
 	static JPanel contentPanel;
-	static SElement contentElement;
 	static String selectX, selectY;
 	static boolean cont;
 	static JButton runButton;
@@ -32,14 +30,15 @@ public class GuiFrontEnd {
 	JTextField percentageBox;
 	String [] scaleVals;
 	Vector<String> parameters;
-		
-	GuiFrontEnd(List<String> samples, SElement elem){		
+	/*
+	 * GuiFrontEnd constructor creates all of the GUI's elements and sets them in the layout
+	 */	
+	GuiFrontEnd(List<String> samples){		
 		
 		window = new JDialog(new JFrame(), "Cell Contour Analyzer", true);
 		window.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		
 		cont = false;
-		contentElement = elem;
 
 		Vector<String> strVec = new Vector<String>(samples);	
 		selectY= selectX=strVec.elementAt(0);
@@ -88,9 +87,6 @@ public class GuiFrontEnd {
 		JLabel perLab = new JLabel("%");
 		perLab.setBounds(255, 80, 60, 30);
 		perLab.setFont(new Font("SansSerif", Font.PLAIN, 16));
-		
-		
-		
 	
 		runButton = new JButton("RUN");
 		runButton.setBounds(190, 145, 150, 40);
@@ -114,36 +110,23 @@ public class GuiFrontEnd {
 		window.setLayout(null);
 		window.setSize(380, 280);
 	}
+	/*
+	 * PromptForOptions activates the gui, causing it to appear on the user's side
+	 */	
 	public boolean PromptForOptions()
 	{	
 		window.setVisible(true);	
 		return cont;
 	}
-		
-	public static JDialog GetWindow(){
-		return window;
-	}
-	public static void setCont(boolean shouldCont)
-	{
-		cont = shouldCont;
-	}	
-	public static SElement getContentElement()
-	{
-		return contentElement;
-	}
-	public static JPanel getContentPanel() {
-		return contentPanel;
-	}
-	public static void setContentPanel(JPanel contentPanel) {
-		GuiFrontEnd.contentPanel = contentPanel;
-	}
-	public static JButton getRunButton() {
-		return runButton;
-	}
-	public static void setRunButton(JButton runButton) {
-		GuiFrontEnd.runButton = runButton;
-	}
 	
+	
+	//MUTATORS
+	public static JDialog GetWindow(){return window;}
+	public static void setCont(boolean shouldCont){cont = shouldCont;}	
+	public static JPanel getContentPanel() {return contentPanel;}
+	public static void setContentPanel(JPanel contentPanel) {GuiFrontEnd.contentPanel = contentPanel;}
+	public static JButton getRunButton() {return runButton;}
+	public static void setRunButton(JButton runButton) {GuiFrontEnd.runButton = runButton;}
 	public static JLabel getYId() {
 		return YID;
 	}
@@ -156,7 +139,6 @@ public class GuiFrontEnd {
 	public static void setImgLabel(JLabel imgLabel) {
 		GuiFrontEnd.imgLabel = imgLabel;
 	}
-	
 	public static JDialog getWindow() {
 		return window;
 	}
@@ -235,8 +217,6 @@ public class GuiFrontEnd {
 	public static boolean isCont() {
 		return cont;
 	}
-	public static void setContentElement(SElement contentElement) {
-		GuiFrontEnd.contentElement = contentElement;
-	}
+	
 	
 }

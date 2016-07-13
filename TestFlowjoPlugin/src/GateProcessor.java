@@ -16,7 +16,10 @@ import com.treestar.lib.xml.GatingML;
 import com.treestar.lib.xml.SElement;
 
 public class GateProcessor {
-	  public  List<List<Point>> Reorder( List<List<Point>> vals)
+	/*
+	 	* Function takes List of lists of points and reorders list from lowest list size to highest list size
+	 */	  
+		public  List<List<Point>> Reorder( List<List<Point>> vals)
 	   {
 	   	ArrayList<List<Point>> newList= new ArrayList<List<Point>>(vals.size());
 	   	int temp=0;
@@ -34,10 +37,17 @@ public class GateProcessor {
 	   	}    	
 	   	return newList;
 	   }
-	  
-	  public SElement SetUp(List<List<Point>> vals, SElement fcmlElem, String fXParm, String fYParm)
+	/*
+	 	* Function takes gate-set points, parent elemen, and parmeters.
+	 * It then constructs a Gating-ML element based on these points 
+	 * and passes this object into the compute function. Compute function computes
+	 * population count inbetween gate set defined in XML and returns it as an integer.
+	 * This integer is then divides the parent population's count producing a percentage.
+	 * The percentage is compared to the parents and kept if it is reasonable close to it.
+	 * The function iterates through all gate sets and returns the best fitting one.
+	 */	
+		public SElement SetUp(List<List<Point>> vals, SElement fcmlElem, String fXParm, String fYParm)
 	   {
-	   	//boolean stop = false;
 	   	SElement gate = new SElement(GatingML.gatingML2);
 	   	int retrievalIndex =0;
 	   	SElement currentBest = new SElement(gate);
@@ -76,16 +86,11 @@ public class GateProcessor {
 		              catch(StringIndexOutOfBoundsException e)
 		             {
 		             	 tElem.setString(GatingML.NAME, fYParm);
-		             }
-		             
-		            // double toDecimal = (double)GuiFrontEnd.getPercentageVal()/100;
-		            
-		       
+		             }		       
 		            gate =  Compute(gate, polyGate, vals, retrievalIndex, sampleURI);
 		            
 		            int populationCOunt = CompareResult(fcmlElem, gate);
 		            double popPercentage = (double)populationCOunt/PluginHelper.getNumExportedEvents(fcmlElem);
-		            //System.out.println(PluginHelper.getNumExportedEvents(fcmlElem));
 		            popPercentage = Math.abs((popPercentage*100)-(double)GuiFrontEnd.getPercentageVal());
 		            
 		            if (popPercentage <.5 )
@@ -103,7 +108,10 @@ public class GateProcessor {
 	   	
 	   	return currentBest;
 	   }  
-	   public SElement Compute(SElement gate, SElement polyGate, List<List<Point>> vals, int retrievalIndex, String sampleURI)
+	  /*
+		* Function constructs a Gating-ML SElement which contains points of all vertices on the perimeter.
+	 */	
+		public SElement Compute(SElement gate, SElement polyGate, List<List<Point>> vals, int retrievalIndex, String sampleURI)
 	   {
 	   	 for (Point pt : vals.get(retrievalIndex))
 	        {
@@ -133,8 +141,13 @@ public class GateProcessor {
 	            gc.setDouble(GatingML.value, y);
 	        } 
 	    	return gate;       
-	    }  
-	   public static int CompareResult(SElement parentPop, SElement gate)
+	    } 
+	   /*
+		* Function constructs a XML SElement that is recognized by the flowjo engine as a request for a statistic.
+		 * This statistic is specifically the population gated around.  This is returned in a call back type 
+		 * and the value is extracted from it as an integer.
+	 */	
+		public static int CompareResult(SElement parentPop, SElement gate)
 	   {	
 	   	try{
 	   	 SElement polyCopy = new SElement(gate.getChild(GatingML.PolygonGate));
@@ -173,8 +186,11 @@ public class GateProcessor {
 	   		return 0;
 	   	}
 	   }
-
-	   public List<List<Point>> getContourPolygons(SElement fcmlElem, String paramXName, String paramYName, String level)
+	   /*
+		* This function creates an XML element that is passsed as a request to the flowjo engine. Results requested 
+		 * is a list of list of points that represents all the coordinates for each cluster on a contour map.
+	 */	
+		public List<List<Point>> getContourPolygons(SElement fcmlElem, String paramXName, String paramYName, String level)
 	    {
 	        paramXName = ParameterUtil.stripStainName(paramXName);
 	        paramYName = ParameterUtil.stripStainName(paramYName);
@@ -238,6 +254,5 @@ public class GateProcessor {
 	            }
 	        }
 	        return result;
-	    }
-	
+	    }	
 }

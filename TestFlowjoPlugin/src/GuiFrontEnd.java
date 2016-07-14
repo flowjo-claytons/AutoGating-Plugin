@@ -1,3 +1,4 @@
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,26 +14,86 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-//
+/**
+ * Gating Plugin: Creates contour gates based on user specified percentage 
+ * @author kelly
+ *	7/13/2016
+ */
 public class GuiFrontEnd {
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * 
+	 */
 	public static JDialog window;
+	/**
+	 * 
+	 */
 	static JPanel contentPanel;
+	/**
+	 * 
+	 */
+	/**
+	 * 
+	 */
 	static String selectX, selectY;
+	/**
+	 * 
+	 */
 	static boolean cont;
+	/**
+	 * 
+	 */
 	static JButton runButton;
+	/**
+	 * 
+	 */
+	/**
+	 * 
+	 */
+	/**
+	 * 
+	 */
 	static JLabel YID, XID, Description;
+	/**
+	 * 
+	 */
 	static JLabel imgLabel;
+	/**
+	 * 
+	 */
+	/**
+	 * 
+	 */
 	static JComboBox xParam, yParam;
+	/**
+	 * 
+	 */
 	static JTextField Intensity;
+	/**
+	 * 
+	 */
 	static int percentageVal;
+	/**
+	 * 
+	 */
 	JTextField percentageBox;
+	/**
+	 * 
+	 */
 	String [] scaleVals;
+	/**
+	 * 
+	 */
 	Vector<String> parameters;
-	/*
+
+	/**
+	 * @param samples
 	 * GuiFrontEnd constructor creates all of the GUI's elements and sets them in the layout
-	 */	
+	 */
 	GuiFrontEnd(List<String> samples){		
 		
 		window = new JDialog(new JFrame(), "Cell Contour Analyzer", true);
@@ -110,110 +171,217 @@ public class GuiFrontEnd {
 		window.setLayout(null);
 		window.setSize(380, 280);
 	}
-	/*
+	/**
 	 * PromptForOptions activates the gui, causing it to appear on the user's side
-	 */	
+	 * @return boolean
+	 */
 	public boolean PromptForOptions()
 	{	
 		window.setVisible(true);	
 		return cont;
 	}
 	
-	
-	//MUTATORS
+	/**
+	 * @return JDialog
+	 */
 	public static JDialog GetWindow(){return window;}
+	/**
+	 * @param shouldCont
+	 */
 	public static void setCont(boolean shouldCont){cont = shouldCont;}	
+	/**
+	 * @return JPanel
+	 */
 	public static JPanel getContentPanel() {return contentPanel;}
+	/**
+	 * @param contentPanel
+	 */
 	public static void setContentPanel(JPanel contentPanel) {GuiFrontEnd.contentPanel = contentPanel;}
+	/**
+	 * @return JButton
+	 */
 	public static JButton getRunButton() {return runButton;}
+	/**
+	 * @param runButton
+	 */
 	public static void setRunButton(JButton runButton) {GuiFrontEnd.runButton = runButton;}
+	/**
+	 * @return JLabel
+	 */
 	public static JLabel getYId() {
 		return YID;
 	}
+	/**
+	 * @param yId
+	 */
 	public static void setYId(JLabel yId) {
 		YID = yId;
 	}
+	/**
+	 * @return JLabel
+	 */
 	public static JLabel getImgLabel() {
 		return imgLabel;
 	}
+	/**
+	 * @param imgLabel
+	 */
 	public static void setImgLabel(JLabel imgLabel) {
 		GuiFrontEnd.imgLabel = imgLabel;
 	}
+	/**
+	 * @return JDialog
+	 */
 	public static JDialog getWindow() {
 		return window;
 	}
+	/**
+	 * @param window
+	 */
 	public static void setWindow(JDialog window) {
 		GuiFrontEnd.window = window;
 	}
+	/**
+	 * @return String
+	 */
 	public static String getSelectX() {
 		return selectX;
 	}
+	/**
+	 * @param selectX
+	 */
 	public static void setSelectX(String selectX) {
 		GuiFrontEnd.selectX = selectX;
 	}
+	/**
+	 * @return String
+	 */
 	public static String getSelectY() {
 		return selectY;
 	}
+	/**
+	 * @param selectY
+	 */
 	public static void setSelectY(String selectY) {
 		GuiFrontEnd.selectY = selectY;
 	}
+	/**
+	 * @return JLabel
+	 */
 	public static JLabel getYID() {
 		return YID;
 	}
+	/**
+	 * @param yID
+	 */
 	public static void setYID(JLabel yID) {
 		YID = yID;
 	}
+	/**
+	 * @return JLabel
+	 */
 	public static JLabel getXID() {
 		return XID;
 	}
+	/**
+	 * @param xID
+	 */
 	public static void setXID(JLabel xID) {
 		XID = xID;
 	}
+	/**
+	 * @return JComboBox
+	 */
 	public static JComboBox getxParam() {
 		return xParam;
 	}
+	/**
+	 * @param xParam
+	 */
 	public static void setxParam(JComboBox xParam) {
 		GuiFrontEnd.xParam = xParam;
 	}
+	/**
+	 * @return JComboBox
+	 */
 	public static JComboBox getyParam() {
 		return yParam;
 	}
+	/**
+	 * @param yParam
+	 */
 	public static void setyParam(JComboBox yParam) {
 		GuiFrontEnd.yParam = yParam;
 	}
+	/**
+	 * @return JTextField
+	 */
 	public static JTextField getIntensity() {
 		return Intensity;
 	}
+	/**
+	 * @param intensity
+	 */
 	public static void setIntensity(JTextField intensity) {
 		Intensity = intensity;
 	}
+	/**
+	 * @return int
+	 */
 	public static int getPercentageVal() {
 		return percentageVal;
 	}
+	/**
+	 * @param percentageVal
+	 */
 	public static void setPercentageVal(int percentageVal) {
 		GuiFrontEnd.percentageVal = percentageVal;
 	}
+	/**
+	 * @return JTextField
+	 */
 	public JTextField getPercentageBox() {
 		return percentageBox;
 	}
+	/**
+	 * @param percentageBox
+	 */
 	public void setPercentageBox(JTextField percentageBox) {
 		this.percentageBox = percentageBox;
 	}
+	/**
+	 * @return String[]
+	 */
 	public String[] getScaleVals() {
 		return scaleVals;
 	}
+	/**
+	 * @param scaleVals
+	 */
 	public void setScaleVals(String[] scaleVals) {
 		this.scaleVals = scaleVals;
 	}
+	/**
+	 * @return Vector<String>
+	 */
 	public Vector<String> getParameters() {
 		return parameters;
 	}
+	/**
+	 * @param parameters
+	 */
 	public void setParameters(Vector<String> parameters) {
 		this.parameters = parameters;
 	}
+	/**
+	 * @return long
+	 */
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	/**
+	 * @return boolean
+	 */
 	public static boolean isCont() {
 		return cont;
 	}

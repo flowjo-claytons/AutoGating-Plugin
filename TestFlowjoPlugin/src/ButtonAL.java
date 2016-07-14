@@ -1,3 +1,8 @@
+/**
+ * Gating Plugin: Creates contour gates based on user specified percentage 
+ * @author kelly
+ *	7/13/2016
+ */
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -5,13 +10,22 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
+
+/**
+ * Gating Plugin: Creates contour gates based on user specified percentage 
+ * @author kelly
+ *
+ */
 public class ButtonAL implements ActionListener{
 
-	 /*
-	 * Overriden function for action listener class.  It is called whenever 
+	/* 
+	 *  Overriden function for action listener class.  It is called whenever 
 	 * the button is clicked.  It checks to make sure that all of the user input is 
 	 * correct.
-	 */	
+	 * 
+	 * (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public synchronized void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

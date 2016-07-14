@@ -2,8 +2,8 @@
 
 AutoGating-Plugin allows user to specify a percentage of population
 they would like to view. This is done on the contour scale where populations 
-are separated from eachother based on their frequency.  This forms a visual
-contour plot of the levels of frequency.  
+are separated from each other based on their frequency.  This forms a visual
+contour plot representing the levels of frequency.  
 User and developer documentation <a href = "https://www.gitbook.com/book/flowjo-kellyh/auto-gating-plugin-documentation/details">here</a>
 
 Reqs:

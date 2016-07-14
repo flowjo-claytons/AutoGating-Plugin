@@ -15,10 +15,17 @@ import com.treestar.lib.fjml.types.DisplayType;
 import com.treestar.lib.xml.GatingML;
 import com.treestar.lib.xml.SElement;
 
+/**
+ * Gating Plugin: Creates contour gates based on user specified percentage 
+ * @author kelly
+ * 7/13/2016
+ */
 public class GateProcessor {
-	/*
-	 	* Function takes List of lists of points and reorders list from lowest list size to highest list size
-	 */	  
+		/**
+		 * Function takes List of lists of points and reorders list from lowest list size to highest list size
+		 * @param vals
+		 * @return List<List<Point>>
+		 */
 		public  List<List<Point>> Reorder( List<List<Point>> vals)
 	   {
 	   	ArrayList<List<Point>> newList= new ArrayList<List<Point>>(vals.size());
@@ -38,14 +45,22 @@ public class GateProcessor {
 	   	return newList;
 	   }
 	/*
-	 	* Function takes gate-set points, parent elemen, and parmeters.
-	 * It then constructs a Gating-ML element based on these points 
-	 * and passes this object into the compute function. Compute function computes
-	 * population count inbetween gate set defined in XML and returns it as an integer.
-	 * This integer is then divides the parent population's count producing a percentage.
-	 * The percentage is compared to the parents and kept if it is reasonable close to it.
-	 * The function iterates through all gate sets and returns the best fitting one.
+	 	
 	 */	
+		/**
+		 * Function takes gate-set points, parent elemen, and parmeters.
+		 * It then constructs a Gating-ML element based on these points 
+		 * and passes this object into the compute function. Compute function computes
+		 * population count inbetween gate set defined in XML and returns it as an integer.
+		 * This integer is then divides the parent population's count producing a percentage.
+		 * The percentage is compared to the parents and kept if it is reasonable close to it.
+		 * The function iterates through all gate sets and returns the best fitting one.
+		 * @param vals
+		 * @param fcmlElem
+		 * @param fXParm
+		 * @param fYParm
+		 * @return SElement
+		 */
 		public SElement SetUp(List<List<Point>> vals, SElement fcmlElem, String fXParm, String fYParm)
 	   {
 	   	SElement gate = new SElement(GatingML.gatingML2);
@@ -80,8 +95,7 @@ public class GateProcessor {
 		             tElem = new SElement(GatingML.FCS_DIMENSION);
 		             dElem.addContent(tElem);
 		             try{
-		             	//System.out.println(fYParm.substring(0, fYParm.indexOf(" :")));
-		 	            tElem.setString(GatingML.NAME, fYParm.substring(0, fYParm.indexOf(" :")));   
+		             	tElem.setString(GatingML.NAME, fYParm.substring(0, fYParm.indexOf(" :")));   
 		             }
 		              catch(StringIndexOutOfBoundsException e)
 		             {
@@ -106,17 +120,23 @@ public class GateProcessor {
 		         }
 		    }
 	   	
-	   	return currentBest;
-	   }  
-	  /*
-		* Function constructs a Gating-ML SElement which contains points of all vertices on the perimeter.
-	 */	
-		public SElement Compute(SElement gate, SElement polyGate, List<List<Point>> vals, int retrievalIndex, String sampleURI)
-	   {
+	   		return currentBest;
+	   	}  
+		
+		/**
+		 * Function constructs a Gating-ML SElement which contains points of all vertices on the perimeter.
+		 * @param gate
+		 * @param polyGate
+		 * @param vals
+		 * @param retrievalIndex
+		 * @param sampleURI
+		 * @return SElement
+		 */
+		public SElement Compute(SElement gate, SElement polyGate, List<List<Point>> vals, int retrievalIndex, String sampleURI){
 	   	 for (Point pt : vals.get(retrievalIndex))
 	        {
-	   		 double x;
-	   		 double y;
+	   		 double x=0;
+	   		 double y=0;
 	   		 try{
 	   			  x= FJPluginHelper.channelToScale(sampleURI, GuiFrontEnd.getSelectX(), pt.x, 256);
 	   		 }
@@ -129,7 +149,7 @@ public class GateProcessor {
 	            }
 	            catch(StringIndexOutOfBoundsException e)
 	            {
-	           	 y = FJPluginHelper.channelToScale(sampleURI, GuiFrontEnd.getSelectY(), 256-pt.y, 256);
+	           	 	y = FJPluginHelper.channelToScale(sampleURI, GuiFrontEnd.getSelectY(), 256-pt.y, 256);
 	            }
 	            SElement gv = new SElement(GatingML.vertex);
 	            polyGate.addContent(gv);
@@ -142,13 +162,17 @@ public class GateProcessor {
 	        } 
 	    	return gate;       
 	    } 
-	   /*
-		* Function constructs a XML SElement that is recognized by the flowjo engine as a request for a statistic.
+		
+		/**
+		 * Function constructs a XML SElement that is recognized by the flowjo engine as a request for a statistic.
 		 * This statistic is specifically the population gated around.  This is returned in a call back type 
 		 * and the value is extracted from it as an integer.
-	 */	
+		 * @param parentPop
+		 * @param gate
+		 * @return int
+		 */
 		public static int CompareResult(SElement parentPop, SElement gate)
-	   {	
+		{	
 	   	try{
 	   	 SElement polyCopy = new SElement(gate.getChild(GatingML.PolygonGate));
 	        SElement gateCopy = new SElement(FJML.Gate);
@@ -186,10 +210,16 @@ public class GateProcessor {
 	   		return 0;
 	   	}
 	   }
-	   /*
-		* This function creates an XML element that is passsed as a request to the flowjo engine. Results requested 
+		
+		/**
+		 * This function creates an XML element that is passsed as a request to the flowjo engine. Results requested 
 		 * is a list of list of points that represents all the coordinates for each cluster on a contour map.
-	 */	
+		 * @param fcmlElem
+		 * @param paramXName
+		 * @param paramYName
+		 * @param level
+		 * @return List<List<Point>> 
+		 */
 		public List<List<Point>> getContourPolygons(SElement fcmlElem, String paramXName, String paramYName, String level)
 	    {
 	        paramXName = ParameterUtil.stripStainName(paramXName);
@@ -229,9 +259,6 @@ public class GateProcessor {
 	        graphElem = graphElem.getChild(FJML.svg);
 	        if (graphElem == null) return null;
 	        List<List<Point>> result = new ArrayList<List<Point>>();
-	        //int contourCount=graphElem.getChildren(FJML.path).size();
-	        //contourCount= graphElem.getChildren(FJML.path).size();
-	        
 	        for (SElement pathElem : graphElem.getChildren(FJML.path))
 	        {
 	        	String pts = pathElem.getString(FJML.d);

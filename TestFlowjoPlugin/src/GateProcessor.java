@@ -76,7 +76,7 @@ public class GateProcessor {
 		            
 		             SElement polyGate = new SElement(GatingML.PolygonGate);
 		             gate.addContent(polyGate);
-		             polyGate.setString(GatingML.id, "ContourTestGate");
+		             polyGate.setString(GatingML.id, GuiFrontEnd.getCellSampleName());
 		
 		             SElement dElem = new SElement(GatingML.dimension);
 		             polyGate.addContent(dElem);
@@ -138,11 +138,11 @@ public class GateProcessor {
 	   		 double x=0;
 	   		 double y=0;
 	   		 try{
-	   			  x= FJPluginHelper.channelToScale(sampleURI, GuiFrontEnd.getSelectX(), pt.x, 256);
+	   			  x= FJPluginHelper.channelToScale(sampleURI, GuiFrontEnd.getSelectX().substring(0, GuiFrontEnd.selectX.indexOf(" :")), pt.x, 256);
 	   		 }
 	   		 catch(StringIndexOutOfBoundsException e)
 	   		 {
-	   			 x = FJPluginHelper.channelToScale(sampleURI, GuiFrontEnd.getSelectX().substring(0, GuiFrontEnd.selectX.indexOf(" :")), pt.x, 256);
+	   			 x = FJPluginHelper.channelToScale(sampleURI, GuiFrontEnd.getSelectX(), pt.x, 256);
 	   		 }
 	            try{
 	           	  y= FJPluginHelper.channelToScale(sampleURI, GuiFrontEnd.getSelectY().substring(0, GuiFrontEnd.selectY.indexOf(" :")), 256-pt.y, 256);

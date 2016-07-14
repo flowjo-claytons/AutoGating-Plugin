@@ -39,15 +39,20 @@ public class GuiFrontEnd {
 	/**
 	 * 
 	 */
-	static String selectX, selectY;
+	/**
+	 * 
+	 */
+	static String selectX, selectY, cellSampleName;
 	/**
 	 * 
 	 */
 	static boolean cont;
+
 	/**
 	 * 
 	 */
 	static JButton runButton;
+
 	/**
 	 * 
 	 */
@@ -57,11 +62,10 @@ public class GuiFrontEnd {
 	/**
 	 * 
 	 */
-	static JLabel YID, XID, Description;
 	/**
 	 * 
 	 */
-	static JLabel imgLabel;
+	static JLabel YID, XID, Description, SampID;
 	/**
 	 * 
 	 */
@@ -69,22 +73,30 @@ public class GuiFrontEnd {
 	 * 
 	 */
 	static JComboBox xParam, yParam;
+
 	/**
 	 * 
 	 */
-	static JTextField Intensity;
+	/**
+	 * 
+	 */
+	static JTextField Intensity, SampleName;
+
 	/**
 	 * 
 	 */
 	static int percentageVal;
+
 	/**
 	 * 
 	 */
 	JTextField percentageBox;
+
 	/**
 	 * 
 	 */
 	String [] scaleVals;
+
 	/**
 	 * 
 	 */
@@ -94,6 +106,7 @@ public class GuiFrontEnd {
 	 * @param samples
 	 * GuiFrontEnd constructor creates all of the GUI's elements and sets them in the layout
 	 */
+
 	GuiFrontEnd(List<String> samples){		
 		
 		window = new JDialog(new JFrame(), "Cell Contour Analyzer", true);
@@ -108,6 +121,11 @@ public class GuiFrontEnd {
 		Description.setBounds(5, 10, 370, 75);
 		
 		xParam= new JComboBox(strVec);
+		
+		FJToolTipRenderer toolTips = new FJToolTipRenderer();
+		toolTips.setToolTips(strVec);
+		
+		xParam.setRenderer(toolTips);
 		xParam.setBounds(35, 80, 150, 30);
 		xParam.addActionListener(new ActionListener(){
 
@@ -145,12 +163,30 @@ public class GuiFrontEnd {
 		Intensity.setFont(new Font("SansSerif", Font.PLAIN, 18));
 		Intensity.setDocument(new JTextFieldLimit(3));
 		
+		SampleName = new JTextField();
+		SampleName.setBounds(35, 220, 140, 30);
+		SampleName.setFont(new Font("SansSerif", Font.PLAIN, 18));
+		SampleName.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				JComboBox xBox = (JComboBox)e.getSource();
+				cellSampleName = (String)xBox.getSelectedItem();	
+			}
+		});
+		
+		SampID = new JLabel("Name of sub-pop:");
+		SampID.setBounds(35, 190, 150, 25);
+		SampID.setFont(new Font("SansSerif", Font.PLAIN, 18));
+
+		
 		JLabel perLab = new JLabel("%");
 		perLab.setBounds(255, 80, 60, 30);
 		perLab.setFont(new Font("SansSerif", Font.PLAIN, 16));
 	
 		runButton = new JButton("RUN");
-		runButton.setBounds(190, 145, 150, 40);
+		runButton.setBounds(190, 215, 150, 40);
 		runButton.addActionListener(new ButtonAL());
 		contentPanel = new JPanel();
 		contentPanel.setBounds(0, 0, 380, 280);
@@ -159,6 +195,10 @@ public class GuiFrontEnd {
 		
 		contentPanel.add(Description);
 		contentPanel.add(Intensity);
+		
+		contentPanel.add(SampleName);
+		contentPanel.add(SampID);
+		
 		
 		contentPanel.add(xParam);
 		contentPanel.add(yParam);
@@ -169,7 +209,7 @@ public class GuiFrontEnd {
 		window.add(contentPanel);	
 		window.setIconImage(new ImageIcon("fence.png").getImage());
 		window.setLayout(null);
-		window.setSize(380, 280);
+		window.setSize(380, 320);
 	}
 	/**
 	 * PromptForOptions activates the gui, causing it to appear on the user's side
@@ -192,18 +232,22 @@ public class GuiFrontEnd {
 	/**
 	 * @return JPanel
 	 */
+
 	public static JPanel getContentPanel() {return contentPanel;}
 	/**
 	 * @param contentPanel
 	 */
+
 	public static void setContentPanel(JPanel contentPanel) {GuiFrontEnd.contentPanel = contentPanel;}
 	/**
 	 * @return JButton
 	 */
+
 	public static JButton getRunButton() {return runButton;}
 	/**
 	 * @param runButton
 	 */
+
 	public static void setRunButton(JButton runButton) {GuiFrontEnd.runButton = runButton;}
 	/**
 	 * @return JLabel
@@ -214,24 +258,16 @@ public class GuiFrontEnd {
 	/**
 	 * @param yId
 	 */
+
 	public static void setYId(JLabel yId) {
 		YID = yId;
 	}
-	/**
-	 * @return JLabel
-	 */
-	public static JLabel getImgLabel() {
-		return imgLabel;
-	}
-	/**
-	 * @param imgLabel
-	 */
-	public static void setImgLabel(JLabel imgLabel) {
-		GuiFrontEnd.imgLabel = imgLabel;
-	}
+
+	
 	/**
 	 * @return JDialog
 	 */
+
 	public static JDialog getWindow() {
 		return window;
 	}
@@ -244,78 +280,91 @@ public class GuiFrontEnd {
 	/**
 	 * @return String
 	 */
+
 	public static String getSelectX() {
 		return selectX;
 	}
 	/**
 	 * @param selectX
 	 */
+
 	public static void setSelectX(String selectX) {
 		GuiFrontEnd.selectX = selectX;
 	}
 	/**
 	 * @return String
 	 */
+
 	public static String getSelectY() {
 		return selectY;
 	}
 	/**
 	 * @param selectY
 	 */
+
 	public static void setSelectY(String selectY) {
 		GuiFrontEnd.selectY = selectY;
 	}
 	/**
 	 * @return JLabel
 	 */
+
 	public static JLabel getYID() {
 		return YID;
 	}
 	/**
 	 * @param yID
 	 */
+
 	public static void setYID(JLabel yID) {
 		YID = yID;
 	}
 	/**
 	 * @return JLabel
 	 */
+
 	public static JLabel getXID() {
 		return XID;
 	}
 	/**
 	 * @param xID
 	 */
+
 	public static void setXID(JLabel xID) {
 		XID = xID;
 	}
 	/**
 	 * @return JComboBox
 	 */
+
 	public static JComboBox getxParam() {
 		return xParam;
 	}
 	/**
 	 * @param xParam
 	 */
+
 	public static void setxParam(JComboBox xParam) {
 		GuiFrontEnd.xParam = xParam;
 	}
 	/**
 	 * @return JComboBox
 	 */
+
 	public static JComboBox getyParam() {
 		return yParam;
 	}
 	/**
 	 * @param yParam
 	 */
+
 	public static void setyParam(JComboBox yParam) {
 		GuiFrontEnd.yParam = yParam;
 	}
 	/**
 	 * @return JTextField
 	 */
+
 	public static JTextField getIntensity() {
 		return Intensity;
 	}
@@ -328,63 +377,120 @@ public class GuiFrontEnd {
 	/**
 	 * @return int
 	 */
+
 	public static int getPercentageVal() {
 		return percentageVal;
 	}
 	/**
 	 * @param percentageVal
 	 */
+
 	public static void setPercentageVal(int percentageVal) {
 		GuiFrontEnd.percentageVal = percentageVal;
 	}
 	/**
 	 * @return JTextField
 	 */
+
 	public JTextField getPercentageBox() {
 		return percentageBox;
 	}
 	/**
 	 * @param percentageBox
 	 */
+
 	public void setPercentageBox(JTextField percentageBox) {
 		this.percentageBox = percentageBox;
 	}
 	/**
 	 * @return String[]
 	 */
+
 	public String[] getScaleVals() {
 		return scaleVals;
 	}
 	/**
 	 * @param scaleVals
 	 */
+
 	public void setScaleVals(String[] scaleVals) {
 		this.scaleVals = scaleVals;
 	}
 	/**
 	 * @return Vector<String>
 	 */
+
 	public Vector<String> getParameters() {
 		return parameters;
 	}
 	/**
 	 * @param parameters
 	 */
+
 	public void setParameters(Vector<String> parameters) {
 		this.parameters = parameters;
 	}
 	/**
 	 * @return long
 	 */
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 	/**
 	 * @return boolean
 	 */
+
 	public static boolean isCont() {
 		return cont;
 	}
 	
-	
+	/**
+	 * @return String
+	 */
+	public static String getCellSampleName() {
+		return cellSampleName;
+	}
+	/**
+	 * @param cellSampleName
+	 */
+	public static void setCellSampleName(String cellSampleName) {
+		GuiFrontEnd.cellSampleName = cellSampleName;
+	}
+	/**
+	 * @return JLabel
+	 */
+	public static JLabel getDescription() {
+		return Description;
+	}
+	/**
+	 * @param description
+	 */
+	public static void setDescription(JLabel description) {
+		Description = description;
+	}
+	/**
+	 * @return JLabel
+	 */
+	public static JLabel getSampID() {
+		return SampID;
+	}
+	/**
+	 * @param sampID
+	 */
+	public static void setSampID(JLabel sampID) {
+		SampID = sampID;
+	}
+	/**
+	 * @return JTextField
+	 */
+	public static JTextField getSampleName() {
+		return SampleName;
+	}
+	/**
+	 * @param sampleName
+	 */
+	public static void setSampleName(JTextField sampleName) {
+		SampleName = sampleName;
+	}
 }

@@ -36,7 +36,9 @@ public class AutoGater implements PopulationPluginInterface {
      * @see com.treestar.lib.core.ExternalPopulationAlgorithmInterface#getName()
      */
     @Override
-    public String getName() {   	 return "Auto-Contour Gating";    }
+    public String getName() {
+    	return ("ACG");
+    }
     /* 
      * Return an XML element that fully describes the algorithm object and can be used to
      * reconstitute the state of the object.

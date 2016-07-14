@@ -7,7 +7,7 @@ contour plot representing the levels of frequency.
 User and developer documentation <a href = "https://www.gitbook.com/book/flowjo-kellyh/auto-gating-plugin-documentation/details">here</a>
 
 Reqs:
-Java 1.6
+Java 1.6<br>
 This plugin requires Flowjo v10.1r7 to be run.
 
 

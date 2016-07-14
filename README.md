@@ -6,7 +6,7 @@ are separated from each other based on their frequency.  This forms a visual
 contour plot representing the levels of frequency.  
 User and developer documentation <a href = "https://www.gitbook.com/book/flowjo-kellyh/auto-gating-plugin-documentation/details">here</a>
 
-Reqs:
+Reqs:<br>
 Developer: Java 1.6<br>
 User: This plugin requires Flowjo v10.1r7 to be run.
 

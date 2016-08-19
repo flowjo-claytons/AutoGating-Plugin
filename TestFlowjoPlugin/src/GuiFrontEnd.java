@@ -120,11 +120,11 @@ public class GuiFrontEnd {
 		Description = new JLabel("<html>This plugin takes a population and gates around a discrete user specified percentage. First select the X and Y parameters and then specify the percentage of events you would like to gate around.</html>");
 		Description.setBounds(5, 10, 370, 75);
 		
-		xParam= new JComboBox(strVec);
 		
 		FJToolTipRenderer toolTips = new FJToolTipRenderer();
 		toolTips.setToolTips(strVec);
 		
+		xParam= new JComboBox(strVec);
 		xParam.setRenderer(toolTips);
 		xParam.setBounds(35, 80, 150, 30);
 		xParam.addActionListener(new ActionListener(){
@@ -138,6 +138,7 @@ public class GuiFrontEnd {
 			}
 			
 		});
+		
 		yParam= new JComboBox(strVec);
 		yParam.setRenderer(toolTips);
 		yParam.setBounds(35, 150, 150, 30);

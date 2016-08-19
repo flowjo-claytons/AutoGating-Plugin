@@ -139,6 +139,7 @@ public class GuiFrontEnd {
 			
 		});
 		yParam= new JComboBox(strVec);
+		yParam.setRenderer(toolTips);
 		yParam.setBounds(35, 150, 150, 30);
 		yParam.addActionListener(new ActionListener(){
 

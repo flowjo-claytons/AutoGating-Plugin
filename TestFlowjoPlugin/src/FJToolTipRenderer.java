@@ -8,6 +8,10 @@ import javax.swing.JList;
 
 public class FJToolTipRenderer  extends DefaultListCellRenderer{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Vector<String> toolTip;
 	@Override
 	public Component getListCellRendererComponent(JList list, Object value,int index, boolean selected, boolean hasFocus)

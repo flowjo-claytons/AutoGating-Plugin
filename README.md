@@ -9,11 +9,7 @@ contour plot representing the levels of frequency.
 Developer: Java 1.6<br>
 User: Flowjo v10.1r7 or higher
 
-Read full GitBook: <a href = "https://www.gitbook.com/book/flowjo-kellyh/auto-gating-plugin-documentation/details">https://www.gitbook.com/book/flowjo-kellyh/auto-gating-plugin-documentation/details</a>.
-
-See flowjo <a href = "http://docs.flowjo.com/d2/plugins/">plugin page </a>for futher details.
-
-<br>
+Read full GitBook: <a href = "https://www.gitbook.com/book/flowjo-kellyh/auto-gating-plugin-documentation/details">https://www.gitbook.com/book/flowjo-kellyh/auto-gating-plugin-documentation/details</a>.<br>
 
 III. DISCLAIMER: <br>
 Software distributed under the APACHE 2.0 License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.

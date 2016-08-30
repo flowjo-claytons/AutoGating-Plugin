@@ -1,9 +1,9 @@
 # AutoGating-Plugin<br>
 
-AutoGating-Plugin allows user to specify a percentage of population
-they would like to view. This is done on the contour scale where populations 
+AutoGating-Plugin allows user to isolate a percentage of a population
+they would like to analyze. This is done on a contour scale where populations 
 are separated from each other based on their frequency.  This forms a visual
-contour plot representing the levels of frequency.  
+contour plot representing levels of frequency.  
 
 ##System Requirements/Dependencies:<br>
 Developer: Java 1.6<br>
